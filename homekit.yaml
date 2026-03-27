@@ -1,0 +1,64 @@
+filter:
+  include_domains:
+    - fan
+    - device_tracker
+    - light
+#    - lock
+    - person
+    - switch
+    - vacuum
+
+  include_entity_globs:
+    - cover.*
+    - binary_sensor.backyard_gate_sensor_window_door_is_closed
+    - binary_sensor.front_door
+    - binary_sensor.ft991119g_laundry_door
+    - binary_sensor.garage_door_interior
+    - binary_sensor.garage_door_open_close_window_door_is_closed
+    - binary_sensor.garage_door_sensor_old_window_door_is_closed
+    - binary_sensor.zs324835n_laundry_door
+    - binary_sensor.zs324835n_laundry_washer_door_lock
+    - binary_sensor.*collar*
+    - binary_sensor.*sleepnumber*
+    - binary_sensor.*x7*
+    - button.*sleepnumber*
+    - button.*x7*
+    - device_tracker.*
+    - fan.*
+    - sensor.dexter*
+    - sensor.luna*
+    - sensor.sleepnumber*
+    - sensor.*x7*
+
+  exclude_domains: []
+
+  exclude_entity_globs:
+    # Switches
+    - switch.*indication*
+    - switch.*node_identify*
+    - switch.*doorbell*
+    - switch.*g4*
+    - switch.garage_door_*
+    - switch.rest_*
+    - switch.sleep*
+    - switch.*unifi*
+    - switch.sngv086*
+    - switch.*_fan_power
+    # Oven
+    - water_heater.sngv086*
+    - sensor.sngv086*
+    # Old devices
+    - device_tracker.chris_iphone_15_pro_max
+    - device_tracker.iphone
+    # Other
+    - camera.*
+    - button.*
+    - event.*
+    - media_player.*
+    - number.*
+    - select.*
+    - sensor.*g4*
+    - sensor.*unifi*
+    - text.*g4*
+    - sensor.*door*
+    - sensor.dining_room_light_access_control*

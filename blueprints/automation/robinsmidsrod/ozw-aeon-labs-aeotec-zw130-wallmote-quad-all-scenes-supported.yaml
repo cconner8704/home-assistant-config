@@ -1,0 +1,216 @@
+blueprint:
+  name: OZW - Aeotec WallMote Quad scene controller
+  description: 'Perform actions when Aeotec WallMote Quad buttons are interacted with.
+
+
+    The release action is equivalent to a long tap.
+
+
+    A release action is always triggered after a hold action, which makes
+
+    them a bit tricky to use. The hold action is repeated as long as the
+
+    button is held down.
+
+
+    The inactive actions you probably do not want to define, as it is
+
+    triggered after every scene activation is finished.
+
+    '
+  domain: automation
+  input:
+    ozw_entity:
+      name: OZW Entity
+      description: The Aeotec WallMote Quad controller to listen for events on.
+      selector:
+        entity:
+          domain:
+          - switch
+          integration: ozw
+          multiple: false
+    tap_top_left_actions:
+      name: Tap Top Left Actions
+      selector:
+        action: {}
+      default: []
+    tap_top_right_actions:
+      name: Tap Top Right Actions
+      selector:
+        action: {}
+      default: []
+    tap_bottom_left_actions:
+      name: Tap Bottom Left Actions
+      selector:
+        action: {}
+      default: []
+    tap_bottom_right_actions:
+      name: Tap Bottom Right Actions
+      selector:
+        action: {}
+      default: []
+    release_top_left_actions:
+      name: Release Top Left Actions
+      selector:
+        action: {}
+      default: []
+    release_top_right_actions:
+      name: Release Top Right Actions
+      selector:
+        action: {}
+      default: []
+    release_bottom_left_actions:
+      name: Release Bottom Left Actions
+      selector:
+        action: {}
+      default: []
+    release_bottom_right_actions:
+      name: Release Bottom Right Actions
+      selector:
+        action: {}
+      default: []
+    hold_top_left_actions:
+      name: Hold Top Left Actions
+      selector:
+        action: {}
+      default: []
+    hold_top_right_actions:
+      name: Hold Top Right Actions
+      selector:
+        action: {}
+      default: []
+    hold_bottom_left_actions:
+      name: Hold Bottom Left Actions
+      selector:
+        action: {}
+      default: []
+    hold_bottom_right_actions:
+      name: Hold Bottom Right Actions
+      selector:
+        action: {}
+      default: []
+    inactive_top_left_actions:
+      name: Inactive Top Left Actions
+      selector:
+        action: {}
+      default: []
+    inactive_top_right_actions:
+      name: Inactive Top Right Actions
+      selector:
+        action: {}
+      default: []
+    inactive_bottom_left_actions:
+      name: Inactive Bottom Left Actions
+      selector:
+        action: {}
+      default: []
+    inactive_bottom_right_actions:
+      name: Inactive Bottom Right Actions
+      selector:
+        action: {}
+      default: []
+  source_url: https://community.home-assistant.io/t/ozw-aeon-labs-aeotec-zw130-wallmote-quad-all-scenes-supported/262712
+mode: single
+trigger:
+- platform: event
+  event_type: ozw.scene_activated
+variables:
+  logger: blueprint.ozw_scene_activation
+  ozw_entity: !input ozw_entity
+action:
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.node_id == state_attr(ozw_entity, ''node_id'')
+        }}'
+    sequence:
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 1 and trigger.event.data.scene_value_id
+            == 0 }}'
+        sequence: !input inactive_top_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 2 and trigger.event.data.scene_value_id
+            == 0 }}'
+        sequence: !input inactive_top_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 3 and trigger.event.data.scene_value_id
+            == 0 }}'
+        sequence: !input inactive_bottom_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 4 and trigger.event.data.scene_value_id
+            == 0 }}'
+        sequence: !input inactive_bottom_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 1 and trigger.event.data.scene_value_id
+            == 1 }}'
+        sequence: !input tap_top_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 2 and trigger.event.data.scene_value_id
+            == 1 }}'
+        sequence: !input tap_top_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 3 and trigger.event.data.scene_value_id
+            == 1 }}'
+        sequence: !input tap_bottom_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 4 and trigger.event.data.scene_value_id
+            == 1 }}'
+        sequence: !input tap_bottom_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 1 and trigger.event.data.scene_value_id
+            == 2 }}'
+        sequence: !input release_top_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 2 and trigger.event.data.scene_value_id
+            == 2 }}'
+        sequence: !input release_top_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 3 and trigger.event.data.scene_value_id
+            == 2 }}'
+        sequence: !input release_bottom_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 4 and trigger.event.data.scene_value_id
+            == 2 }}'
+        sequence: !input release_bottom_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 1 and trigger.event.data.scene_value_id
+            == 3 }}'
+        sequence: !input hold_top_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 2 and trigger.event.data.scene_value_id
+            == 3 }}'
+        sequence: !input hold_top_right_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 3 and trigger.event.data.scene_value_id
+            == 3 }}'
+        sequence: !input hold_bottom_left_actions
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.scene_id == 4 and trigger.event.data.scene_value_id
+            == 3 }}'
+        sequence: !input hold_bottom_right_actions
+      default:
+      - service: system_log.write
+        data:
+          level: debug
+          logger: '{{ logger }}'
+          message: Activated scene '{{ trigger.event.data.scene_label }}' ({{ trigger.event.data.scene_id
+            }}) with value '{{ trigger.event.data.scene_value_label }}' ({{ trigger.event.data.scene_value_id
+            }}) for node '{{ ozw_entity }}' ({{ trigger.event.data.node_id }})
+  default: []

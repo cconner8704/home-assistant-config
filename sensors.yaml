@@ -1,0 +1,31 @@
+# COMMENTED OUT - Life360 removed, broken until Vicky is on OwnTracks
+# TODO: Replace device_tracker.life360_vicky_conner with Vicky's OwnTracks entity
+# TODO: Move API key reference to use !secret google_maps_api_key
+#- platform: rest
+#  name: Wife ETA
+#  resource_template: >-
+#    {% set lat = state_attr('device_tracker.life360_vicky_conner', 'latitude') | float(0) %}
+#    {% set lon = state_attr('device_tracker.life360_vicky_conner', 'longitude') | float(0) %}
+#    {% if lat != 0 and lon != 0 %}
+#    https://maps.googleapis.com/maps/api/distancematrix/json?origins={{ lat }},{{ lon }}&destinations=37.988062230698,-84.44542125107614&key=!secret google_maps_api_key&mode=driving
+#    {% else %}
+#    https://maps.googleapis.com/maps/api/distancematrix/json?origins=0,0&destinations=0,0&key=!secret google_maps_api_key&mode=driving
+#    {% endif %}
+#  method: GET
+#  headers:
+#    User-Agent: "Mozilla/5.0"
+#  value_template: >-
+#    {% if value_json is not none and 'rows' in value_json and value_json.rows
+#        and 'elements' in value_json.rows[0] and value_json.rows[0].elements
+#        and 'duration' in value_json.rows[0].elements[0] %}
+#      {{ (value_json.rows[0].elements[0].duration.value / 60) | round }} min
+#    {% else %}
+#      Unknown
+#    {% endif %}
+#  json_attributes:
+#    - destination_addresses
+#    - origin_addresses
+#    - rows
+#  scan_interval: 60
+#  availability: >-
+#    {{ state_attr('device_tracker.life360_vicky_conner', 'latitude') is not none }}

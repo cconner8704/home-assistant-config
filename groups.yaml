@@ -1,0 +1,8 @@
+Household:
+  - person.chris_conner
+  - person.vicky_conner
+
+Household_trackers:
+  - device_tracker.chris_iphone_17_pro_max
+  - device_tracker.chris_conner_a79bd926_0969_4479_9469_03f8dc6a9029
+  # TODO: Add Vicky's OwnTracks tracker when set up

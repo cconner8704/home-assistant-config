@@ -1,0 +1,230 @@
+- sensor:
+  - name: Time
+    state: "{{ now().strftime('%H:%M:%S') }}"
+
+
+- switch:
+    - name: Bedroom Apple TV Power
+      unique_id: bedroom_apple_tv_power
+      icon: mdi:television
+      state: >
+        {{ not is_state('media_player.master_bedroom2_apple_tv_apple_tv', 'off')
+           and not is_state('media_player.master_bedroom2_apple_tv_apple_tv', 'unavailable') }}
+      turn_on:
+        - service: media_player.turn_on
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+      turn_off:
+        - service: media_player.turn_off
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+
+    - name: Living Room Media Power
+      unique_id: living_room_media
+      state: "{{ is_state('media_player.living_room_apple_tv', 'on') }}"
+      turn_on:
+        - service: media_player.turn_on
+          target:
+            entity_id: media_player.living_room_apple_tv
+      turn_off:
+        - service: media_player.turn_off
+          target:
+            entity_id: media_player.living_room_apple_tv
+
+    - name: Hatch
+      unique_id: hatch
+      state: >
+        {{ is_state('media_player.master_bedroom_hatch_media_player', 'playing') }}
+      turn_on:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.sleep
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.master_bedroom_hatch_media_player
+
+    # These "play_*" switches are really buttons.
+    # Keeping them as switches by forcing state = false (momentary).
+    - name: Play Coco Twinkle Master Bedroom
+      unique_id: play_coco_twinkle_master_bedroom
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=mUNVZBEYxck"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+
+    - name: Play Alexander Music Master Bedroom
+      unique_id: play_alexander_music_master_bedroom
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=QhEaHcQgyLs&list=PLR1n-9aJmJ2Uqgv5_-lId5CrwFcut225M&index=1"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+
+    - name: Play Night Sky Master Bedroom
+      unique_id: play_night_sky_master_bedroom
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=v3XlzU9ddnE"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+
+    - name: Play Christmas Master Bedroom
+      unique_id: play_christmas_master_bedroom
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=IOyiqISn2e0"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+
+    - name: Play Alexander Music Living Room
+      unique_id: play_alexander_music_living_room
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.living_room_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=QhEaHcQgyLs&list=PLR1n-9aJmJ2Uqgv5_-lId5CrwFcut225M&index=1"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.living_room_apple_tv
+
+    - name: Play FireTrucks Master Bedroom
+      unique_id: play_firetrucks_master_bedroom
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=Bg4vhn8S2IQ&list=PLR1n-9aJmJ2UkN7NYzXDM5bb1-B5xOfO_"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.master_bedroom2_apple_tv_apple_tv
+
+    - name: Play FireTrucks Living Room
+      unique_id: play_firetrucks_living_room
+      state: "{{ false }}"
+      turn_on:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.living_room_apple_tv
+          data:
+            media_content_type: url
+            media_content_id: "youtube://www.youtube.com/watch?v=Bg4vhn8S2IQ&list=PLR1n-9aJmJ2UkN7NYzXDM5bb1-B5xOfO_"
+      turn_off:
+        - service: media_player.media_stop
+          target:
+            entity_id: media_player.living_room_apple_tv
+
+
+
+
+
+
+
+
+
+
+# COMMENTED OUT - Winter 2025 - Uncomment in Spring when WaterGuru has batteries
+# See TODO: spring-pool-setup
+#sensor:
+#  - name: "Pool Measure Battery Homekit"
+#    unique_id: sensor.pool_battery_homekit
+#    state: "{{ (states('sensor.pool_battery') | float(0)) * 1 }}"
+#    unit_of_measurement: "%"
+#    device_class: battery
+#    icon: mdi:battery
+#
+#  - name: "Pool Measure RSSI Homekit"
+#    unique_id: sensor.pool_rssi_homekit
+#    state: "{{ (states('sensor.pool_rssi') | float(0)) * 1 }}"
+#    unit_of_measurement: "dBm"
+#    device_class: signal_strength
+#    icon: mdi:wifi
+#
+#  - name: "Pool Measure ORP Homekit"
+#    unique_id: sensor.pool_oxydo_reduction_potential_homekit
+#    state: "{{ (states('sensor.pool_oxydo_reduction_potential') | float(0)) * 1 }}"
+#    unit_of_measurement: "mV"
+#    device_class: voltage
+#    icon: mdi:flash
+#
+#  - name: "Pool Measure pH Homekit"
+#    unique_id: sensor.pool_ph_homekit
+#    state: "{{ (states('sensor.pool_ph') | float(0)) * 1 }}"
+##    unit_of_measurement: "pH"
+#    device_class: ph
+#    icon: mdi:water-opacity
+#
+#  - name: "Pool Measure Salt Homekit"
+#    unique_id: sensor.pool_salt_homekit
+#    state: "{{ (states('sensor.pool_salt') | float(0)) * 1 }}"
+#    unit_of_measurement: "ppm"
+##    device_class: measurement
+#    icon: mdi:shaker-outline
+
+# Uncomment the section below if you want to add power consumption sensors
+# template:
+#   - sensor:
+#       - name: "Used Watts"
+#         unit_of_measurement: "W"
+#         unique_id: sensor.pool_ph_homekit
+#         device_class: power
+#         state_class: measurement
+#         state: >
+#           {% set usage = states('sensor.power_meter_electric_consumption_w') | float %}
+#           {% set generation = states('sensor.sb6_0_1av_41_598_grid_power') | float %}
+#           {% if (usage - generation) < 0 %}
+#              0
+#           {% else %}
+#              {{ (usage - generation) | round(2) }}
+#           {% endif %}
+
+#       - name: "Exported Solar"
+#         unit_of_measurement: "W"
+#         unique_id: sensor.actualwattssold
+#         device_class: power
+#         state_class: measurement
+#         state: >
+#           {% set usage = states('sensor.power_meter_electric_consumption_w') | float %}
+#           {% set generation = states('sensor.sb6_0_1av_41_598_grid_power') | float %}
+#           {% if (generation - usage) < 0 %}
+#              0
+#           {% else %}
+#              {{ (generation - usage) | round(2) }}
+#           {% endif %}

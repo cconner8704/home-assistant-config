@@ -1,0 +1,62 @@
+# Secrets - NEVER commit
+secrets.yaml
+.cloud/
+.storage/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+*.log.*
+
+# Cache and generated files
+.cache/
+.ruff_cache/
+
+# Dependencies
+deps/
+__pycache__/
+
+# Homebridge (has passwords in config.json)
+homebridge/
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+
+# Backups
+backups/
+*.tar
+
+# SSH keys
+id_rsa*
+*.pem
+
+# Lock files
+.ha_run.lock
+
+# HACS frontend (managed by HACS, not config)
+www/community/
+
+# Watchman reports
+watchman_report.txt
+
+# Misc
+tts/
+*.pid
+
+# Custom components managed by HACS
+custom_components/
+
+# AI memory (may contain sensitive context)
+ai_memory/
+
+# Abode
+Abode/
+
+# Zigbee
+zigbee.db*

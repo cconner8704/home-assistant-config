@@ -1,0 +1,54 @@
+- alias: Reboot Apple TV config if unavailable
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.master_bedroom2_apple_tv_apple_tv
+    to: unavailable
+  condition: []
+  action:
+  - action: homeassistant.reload_config_entry
+    target:
+      entity_id:
+      - media_player.master_bedroom2_apple_tv_apple_tv
+  mode: single
+- alias: Daily Watchman Report
+  description: Runs the Watchman report every day at 5:00 AM
+  trigger:
+  - platform: time
+    at: 05:00:00
+  action:
+  - action: watchman.report
+  mode: single
+- alias: Coffee Morning Lights
+  id: coffee_morning_lights
+  description: When the Nespresso starts brewing between 8am-8pm ET, turn on the morning lights and office fan.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.nespresso_electric_consumption_w
+    above: 10
+    for:
+      seconds: 3
+  condition:
+  - condition: time
+    after: "08:00:00"
+    before: "20:00:00"
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id:
+      - switch.dining_room_can_light
+      - switch.dining_room_light
+      - switch.entry_light_2
+      - switch.kitchen_can_light
+      - switch.kitchen_bar_light
+      - switch.kitchen_cabinet_light
+  - service: light.turn_on
+    target:
+      entity_id:
+      - light.office_can_light
+  - service: fan.turn_on
+    target:
+      entity_id:
+      - fan.office_fan_switch
+  mode: single

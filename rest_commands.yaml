@@ -1,0 +1,9 @@
+# COMMENTED OUT - newnote endpoint no longer exists
+#newnote:
+#  url: http://192.168.21.99:8080/SendMessage
+
+# COMMENTED OUT - test command, API key moved to secrets.yaml
+#test_google_maps:
+#  url: "https://maps.googleapis.com/maps/api/distancematrix/json?origins=38.123456,-84.987654&destinations=38.987654,-84.123456&mode=driving&key=!secret google_maps_api_key"
+#  method: "GET"
+#  content_type: "application/json"

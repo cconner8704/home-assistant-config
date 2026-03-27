@@ -1,0 +1,25 @@
+# COMMENTED OUT - Garage door control broken, moved to MyQ
+# TODO: install-ratgdo - Will recreate when Ratgdo is installed
+#open_garage_door:
+#  sequence:
+#  - service: input_boolean.turn_on
+#    alias: Garage is Opening Boolean
+#    data:
+#      entity_id: input_boolean.garage_opening1
+#  - service: switch.turn_on
+#    alias: Opening Garage
+#    data:
+#      entity_id: switch.garage_door_2
+#  alias: Open Garage Door
+#  mode: single
+#  icon: mdi:garage-open
+#close_garage_door:
+#  sequence:
+#  - service: input_boolean.turn_on
+#    alias: Garage is Closing Boolean
+#    data:
+#      entity_id: input_boolean.garage_closing1
+#  - service: switch.turn_on
+#    alias: Closing Garage
+#    data:
+#      entity_id: switch.garage_door_2
