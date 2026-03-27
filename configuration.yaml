@@ -1,40 +1,31 @@
-# iCloud and Google integrations removed — credentials stored in Infisical
+# Home Assistant Configuration
+# Config files at ~/homelab/ha-config/ via Samba mount
+# Git repo: github.com/cconner8704/home-assistant-config
+# Secrets: secrets.yaml (gitignored) + Infisical
 
-panel_custom:
-  - name: Automations
-    sidebar_title: Automations
-    sidebar_icon: mdi:cog-transfer
-    js_url: /api/hassio/app/entrypoint.js
-    url_path: config/automation/dashboard
-    embed_iframe: true
-    require_admin: true
-    config:
-      ingress: core_configurator
+# Default integrations (frontend, mobile_app, stream, alerts, etc.)
+default_config:
 
+# Text-to-speech
 tts:
   - platform: google_translate
 
+# Include files
 automation: !include automations.yaml
-cloud: !include cloud.yaml
 cover: !include covers.yaml
-default_config: !include default_config.yaml
 homekit: !include homekit.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 sensor: !include sensors.yaml
-switch: !include switches.yaml
 group: !include groups.yaml
-#resources: !include resources.yaml
-rest_command: !include rest_commands.yaml
 template: !include templates.yaml
 
-
-# Entity Customization - Fixes friendly names and formatting
+# Entity customization
 homeassistant:
-  internal_url: "http://192.168.21.14:8123"
+  internal_url: "http://homeassistant.local:8123"
   customize: !include customize_entries.yaml
 
+# Custom frontend cards (HACS)
 frontend:
   extra_module_url:
     - /local/community/custom-brand-icons/custom-brand-icons.js
-    
