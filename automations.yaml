@@ -12,14 +12,23 @@
       entity_id:
       - media_player.master_bedroom2_apple_tv_apple_tv
   mode: single
-- alias: Daily Watchman Report
-  description: Runs the Watchman report every day at 5:00 AM
+
+- alias: Daily Watchman Report with Gotify
+  id: daily_watchman_gotify
+  description: Runs Watchman report at 5am and sends missing entity count to Gotify
   trigger:
   - platform: time
-    at: 05:00:00
+    at: "05:00:00"
   action:
   - action: watchman.report
+  - delay:
+      seconds: 10
+  - action: rest_command.gotify_watchman
+    data:
+      title: "HA Watchman Report"
+      message: "Missing entities: {{ states('sensor.watchman_missing_entities') }}. Services: {{ states('sensor.watchman_missing_services') }}."
   mode: single
+
 - alias: Coffee Morning Lights
   id: coffee_morning_lights
   description: When the Nespresso starts brewing between 8am-8pm ET, turn on the morning lights and office fan.

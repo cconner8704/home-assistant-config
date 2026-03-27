@@ -29,3 +29,11 @@ homeassistant:
 frontend:
   extra_module_url:
     - /local/community/custom-brand-icons/custom-brand-icons.js
+
+# REST commands
+rest_command:
+  gotify_watchman:
+    url: !secret gotify_url
+    method: POST
+    content_type: "application/json"
+    payload: '{"title": "{{ title }}", "message": "{{ message }}", "priority": 5}'
