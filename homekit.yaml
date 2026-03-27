@@ -47,9 +47,7 @@ filter:
     # Oven
     - water_heater.sngv086*
     - sensor.sngv086*
-    # Old devices
-    - device_tracker.chris_iphone_15_pro_max
-    - device_tracker.iphone
+    # Old devices (removed — entities no longer exist)
     # Other
     - camera.*
     - button.*

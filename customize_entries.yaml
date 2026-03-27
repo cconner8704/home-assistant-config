@@ -1,27 +1,6 @@
 # ==============================================================================
-# FIX: Empty Friendly Names
-# ==============================================================================
-
-light.dining_room_can_light:
-  friendly_name: "Dining Room Can Light"
-
-switch.deck_fan:
-  friendly_name: "Deck Fan"
-
-switch.living_room_fan:
-  friendly_name: "Living Room Fan"
-
-switch.deck_light_2:
-  friendly_name: "Deck Light 2"
-
-  # ==============================================================================
-  # NOTE: Bond fan lights removed - devices no longer exist
-  # (light.living_room_fan_basic, light.master_bedroom_fan_basic, 
-  #  light.office_fan_switch_basic were removed before cleanup)
-  # ==============================================================================
-  
-  # ==============================================================================
-# FIX: Trailing Spaces - Remove extra spaces from friendly names
+# Entity Customization — Friendly Names
+# Last cleaned: 2026-03-27
 # ==============================================================================
 
 # Office
@@ -39,12 +18,12 @@ fan.living_room_fan:
   friendly_name: "Living Room Fan"
 
 # Master Bedroom
-switch.master_bedroom_can_light:
-  friendly_name: "Master Bedroom Can Light"
 fan.master_bedroom_fan:
   friendly_name: "Master Bedroom Fan"
 light.master_bedroom_lamp:
   friendly_name: "Master Bedroom Lamp"
+switch.master_bedroom_lamp2:
+  friendly_name: "Master Bedroom Lamp 2"
 
 # Master Bathroom
 switch.master_bathroom_light_1:
@@ -62,6 +41,22 @@ switch.kitchen_can_light:
 switch.kitchen_cabinet_light:
   friendly_name: "Kitchen Cabinet Light"
 
+# Deck
+switch.deck_fan:
+  friendly_name: "Deck Fan"
+switch.deck_can_light:
+  friendly_name: "Deck Can Light"
+switch.deck_light_1:
+  friendly_name: "Deck Light 1"
+switch.deck_light_2:
+  friendly_name: "Deck Light 2"
+
+# Dining Room
+switch.dining_room_light:
+  friendly_name: "Dining Room Light"
+switch.dining_room_can_light:
+  friendly_name: "Dining Room Can Light"
+
 # Other Rooms
 switch.upstairs_hall_light:
   friendly_name: "Upstairs Hall Light"
@@ -69,117 +64,44 @@ switch.nook_light:
   friendly_name: "Nook Light"
 switch.loft_light:
   friendly_name: "Loft Light"
-switch.stair_light:
-  friendly_name: "Stair Light"
 switch.basement_entry:
   friendly_name: "Basement Entry"
-switch.deck_can_light:
-  friendly_name: "Deck Can Light"
-switch.deck_light_1:
-  friendly_name: "Deck Light 1"
-switch.dining_room_light:
-  friendly_name: "Dining Room Light"
-switch.dining_room_can_light:
-  friendly_name: "Dining Room Can Light"
 switch.bathroom_hall_light:
   friendly_name: "Bathroom Hall Light"
 switch.garage_hall_light:
   friendly_name: "Garage Hall Light"
-switch.porch_garage_light:
-  friendly_name: "Porch Garage Light"
-
-# Pool
-switch.pool_outlets:
-  friendly_name: "Pool Outlets"
+switch.porch_light:
+  friendly_name: "Porch Light"
 switch.nespresso:
   friendly_name: "Nespresso"
 
-# ==============================================================================
-# FIX: Capitalization - Standardize to Title Case
-# ==============================================================================
-
-switch.porch_light:
-  friendly_name: "Porch Light"
-
-# ==============================================================================
-# FIX: Inconsistent Numbering - Standardize naming
-# ==============================================================================
-
-# Master Bedroom Lamps - keep consistent numbering
-light.master_bedroom_lamp2:
-  friendly_name: "Master Bedroom Lamp 2"
-switch.master_bedroom_lamp2:
-  friendly_name: "Master Bedroom Lamp 2"
-
-# Pool Outlets - standardize naming
+# Pool Outlets
+switch.pool_outlets:
+  friendly_name: "Pool Outlets"
 switch.pool_outlets_1:
   friendly_name: "Pool Outlet 1"
 switch.pool_outlets_2:
   friendly_name: "Pool Outlet 2"
 
-# Backyard - standardize to one word "Backyard" (not "Back Yard")
-switch.backyard_outlet:
-  friendly_name: "Backyard Outlet 1"
-switch.backyard_outlet_2:
-  friendly_name: "Backyard Outlet 2"
-switch.backyard_outlet_3:
-  friendly_name: "Backyard Outlet 3"
-
-# ==============================================================================
-# IMPROVE: Z-Wave Technical Names - Simplify for better UX
-# ==============================================================================
-
-# Deck Light 1 - Simplify button indication names
-switch.deck_light_1_node_identify_binary:
-  friendly_name: "Deck Light 1 Node Identify"
-
-# Dining Room Light - Simplify button indication names
-switch.dining_room_light_node_identify_binary:
-  friendly_name: "Dining Room Light Node Identify"
-
-# Living Room Light - Simplify button indication names
-switch.living_room_light_node_identify_binary:
-  friendly_name: "Living Room Light Node Identify"
-
-# Office Can Light - Simplify button indication names
-switch.office_can_light_node_identify_binary:
-  friendly_name: "Office Can Light Node Identify"
-
-# ==============================================================================
-# ADDITIONAL: Media Player Improvements
-# ==============================================================================
-
-# Living Room HomePods - clarify which is which
+# Media Players
 media_player.living_room_homepod1:
   friendly_name: "Living Room HomePod 1"
 media_player.living_room_homepod2:
   friendly_name: "Living Room HomePod 2"
-
-# Office HomePod
 media_player.office_homepod:
   friendly_name: "Office HomePod"
-
-# Bedroom media
 media_player.bedroom:
   friendly_name: "Bedroom HomePod"
 
-# ==============================================================================
-# ADDITIONAL: Binary Sensor Improvements
-# ==============================================================================
-
-# Simplify verbose Z-Wave binary sensor names
+# Binary Sensors — Simplified Names
 binary_sensor.backyard_gate_sensor_window_door_is_closed:
   friendly_name: "Backyard Gate Closed"
 binary_sensor.backyard_gate_sensor_window_door_is_open:
   friendly_name: "Backyard Gate Open"
-binary_sensor.backyard_gate_sensor_low_battery_level:
-  friendly_name: "Backyard Gate Low Battery"
-
 binary_sensor.garage_door_open_close_window_door_is_closed:
   friendly_name: "Garage Door Closed"
 binary_sensor.garage_door_open_close_window_door_is_open:
   friendly_name: "Garage Door Open"
-
 binary_sensor.garage_door_sensor_old_window_door_is_closed:
   friendly_name: "Garage Door Sensor (Old) Closed"
 binary_sensor.garage_door_sensor_old_window_door_is_open:
