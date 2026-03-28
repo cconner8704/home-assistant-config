@@ -26,7 +26,7 @@
   - action: rest_command.gotify_watchman
     data:
       title: "HA Watchman Report"
-      message: "Missing entities: {{ states('sensor.watchman_missing_entities') }}. Services: {{ states('sensor.watchman_missing_services') }}."
+      message: "Missing entities: {{ states('sensor.watchman_missing_entities') }}"
   mode: single
 
 - alias: Coffee Morning Lights
