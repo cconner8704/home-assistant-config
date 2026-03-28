@@ -61,3 +61,55 @@
       entity_id:
       - fan.office_fan_switch
   mode: single
+
+- alias: Lightning Alert — Pool Safety
+  id: lightning_pool_safety
+  description: Alert when lightning is detected within 15 miles. Get out of the pool!
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.home_lightning_distance
+    below: 15
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.home_lightning_counter
+    above: 0
+  action:
+  - action: rest_command.gotify_watchman
+    data:
+      title: "LIGHTNING ALERT"
+      message: "Lightning detected {{ states('sensor.home_lightning_distance') }} miles away ({{ states('sensor.home_lightning_azimuth') }}°). GET OUT OF THE POOL!"
+  mode: single
+
+- alias: Lightning All Clear
+  id: lightning_all_clear
+  description: Notify when no lightning has been detected for 30 minutes
+  trigger:
+  - platform: state
+    entity_id: sensor.home_lightning_distance
+    to: "unknown"
+    for:
+      minutes: 30
+  condition: []
+  action:
+  - action: rest_command.gotify_watchman
+    data:
+      title: "Lightning All Clear"
+      message: "No lightning detected for 30 minutes. Pool is safe."
+  mode: single
+
+- alias: NWS Severe Weather Alert
+  id: nws_severe_weather
+  description: Push notification for any NWS severe weather alert
+  trigger:
+  - platform: state
+    entity_id: weather.klex
+    attribute: alerts
+  condition:
+  - condition: template
+    value_template: "{{ state_attr('weather.klex', 'alerts') | length > 0 }}"
+  action:
+  - action: rest_command.gotify_watchman
+    data:
+      title: "SEVERE WEATHER ALERT"
+      message: "NWS alert for your area. Check weather.klex for details."
+  mode: single
