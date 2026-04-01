@@ -13,9 +13,9 @@
       - media_player.master_bedroom2_apple_tv_apple_tv
   mode: single
 
-- alias: Daily Watchman Report with Gotify
-  id: daily_watchman_gotify
-  description: Runs Watchman report at 5am and sends missing entity count to Gotify
+- alias: Daily Watchman Report
+  id: daily_watchman_imessage
+  description: Runs Watchman report at 5am and sends missing entity count via iMessage
   trigger:
   - platform: time
     at: "05:00:00"
@@ -23,10 +23,9 @@
   - action: watchman.report
   - delay:
       seconds: 10
-  - action: rest_command.gotify_watchman
+  - action: rest_command.imessage
     data:
-      title: "HA Watchman Report"
-      message: "Missing entities: {{ states('sensor.watchman_missing_entities') }}"
+      message: "[Watchman] Missing entities: {{ states('sensor.watchman_missing_entities') }}"
   mode: single
 
 - alias: Coffee Morning Lights
@@ -74,10 +73,9 @@
     entity_id: sensor.home_lightning_counter
     above: 0
   action:
-  - action: rest_command.gotify_watchman
+  - action: rest_command.imessage
     data:
-      title: "LIGHTNING ALERT"
-      message: "Lightning detected {{ states('sensor.home_lightning_distance') }} miles away ({{ states('sensor.home_lightning_azimuth') }}°). GET OUT OF THE POOL!"
+      message: "[Lightning] ⚡ {{ states('sensor.home_lightning_distance') }} miles away ({{ states('sensor.home_lightning_azimuth') }}°). GET OUT OF THE POOL!"
   mode: single
 
 - alias: Lightning All Clear
@@ -91,10 +89,9 @@
       minutes: 30
   condition: []
   action:
-  - action: rest_command.gotify_watchman
+  - action: rest_command.imessage
     data:
-      title: "Lightning All Clear"
-      message: "No lightning detected for 30 minutes. Pool is safe."
+      message: "[Lightning] All clear — no strikes for 30 minutes. Pool is safe."
   mode: single
 
 - alias: NWS Severe Weather Alert
@@ -108,8 +105,7 @@
   - condition: template
     value_template: "{{ state_attr('weather.klex', 'alerts') | length > 0 }}"
   action:
-  - action: rest_command.gotify_watchman
+  - action: rest_command.imessage
     data:
-      title: "SEVERE WEATHER ALERT"
-      message: "NWS alert for your area. Check weather.klex for details."
+      message: "[Weather] ⚠️ NWS severe weather alert for your area. Check HA for details."
   mode: single

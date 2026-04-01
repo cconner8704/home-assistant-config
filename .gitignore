@@ -2,6 +2,8 @@
 secrets.yaml
 .cloud/
 .storage/
+.envrc
+.mcp.json
 
 # Database
 *.db

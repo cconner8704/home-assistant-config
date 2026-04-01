@@ -1,6 +1,12 @@
-# Claude Code Home Assistant -- Always-On Rules
+# Instructions for ha-config CLAUDE.md
 
-**Session identity:** You are the **Home Assistant session** -- responsible for HA automations, dashboards, entity management, device integrations, and smart home configuration. The homelab session handles infrastructure/Docker/networking. The dexters_blog session handles blog content. If you encounter infrastructure issues (containers down, DNS problems, Docker networking), note them and punt to the homelab session -- don't fix them here.
+Copy the content below into `/Users/chrisconner/homelab/ha-config/CLAUDE.md` (replace the existing one).
+
+---
+
+# Claude Code Home Assistant – Always-On Rules
+
+**Session identity:** You are the **Home Assistant session** — responsible for HA automations, dashboards, entity management, device integrations, and smart home configuration. The homelab session handles infrastructure/Docker/networking. The dexters_blog session handles blog content.
 
 ## Mandatory Rules
 
@@ -30,32 +36,32 @@ Secrets:         secrets.yaml (gitignored) + Infisical at /infrastructure
 
 ## Access Methods (Priority Order)
 
-1. **HA MCP** -- entity control, state queries (turn on lights, check sensors)
-2. **Direct file editing** -- ~/homelab/ha-config/*.yaml (Samba mount, edits are live on HA)
-3. **hass-cli** -- quick state checks, service calls
-4. **REST API (curl)** -- reload services, render templates, fire events
-5. **SSH** -- `ha core check/restart/logs`, config validation
-6. **Context7 MCP** -- look up current HA docs (library: /home-assistant/home-assistant.io)
+1. **HA MCP** — entity control, state queries (turn on lights, check sensors)
+2. **Direct file editing** — ~/homelab/ha-config/*.yaml (Samba mount, edits are live on HA)
+3. **hass-cli** — quick state checks, service calls
+4. **REST API (curl)** — reload services, render templates, fire events
+5. **SSH** — `ha core check/restart/logs`, config validation
+6. **Context7 MCP** — look up current HA docs (library: /home-assistant/home-assistant.io)
 
 ## Key Files
 
 ```
-configuration.yaml      -- main config, includes other files
-automations.yaml        -- all automations
-templates.yaml          -- template switches (Apple TV media, Hatch, etc.)
-sensors.yaml            -- REST sensors (Wife ETA -- commented out)
-homekit.yaml            -- HomeKit bridge filter
-customize_entries.yaml  -- friendly name overrides
-groups.yaml             -- household groups + tracker groups
-covers.yaml             -- garage door (TODO: Ratgdo)
-scripts.yaml            -- scripts (TODO: Ratgdo)
-scenes.yaml             -- scenes
-secrets.yaml            -- secrets (GITIGNORED)
+configuration.yaml      — main config, includes other files
+automations.yaml        — all automations
+templates.yaml          — template switches (Apple TV media, Hatch, etc.)
+sensors.yaml            — REST sensors (Wife ETA — commented out)
+homekit.yaml            — HomeKit bridge filter
+customize_entries.yaml  — friendly name overrides
+groups.yaml             — household groups + tracker groups
+covers.yaml             — garage door (TODO: Ratgdo)
+scripts.yaml            — scripts (TODO: Ratgdo)
+scenes.yaml             — scenes
+secrets.yaml            — secrets (GITIGNORED)
 ```
 
 ## Deployment Workflow
 
-No scp needed -- Samba mount means file edits are live on HA:
+No scp needed — Samba mount means file edits are live on HA:
 
 1. **Edit** files directly in ~/homelab/ha-config/
 2. **Validate:** `ssh root@homeassistant.local "ha core check"`
@@ -67,31 +73,31 @@ No scp needed -- Samba mount means file edits are live on HA:
 
 ## Current Automations
 
-- Coffee Morning Lights -- Nespresso >10W triggers kitchen/dining/office lights + office fan
-- Daily Watchman Report -- 5am, reports missing entity count via Gotify
-- Reboot Apple TV -- auto-reload config when master bedroom ATV goes unavailable
-- Lightning Alert -- Gotify push when Blitzortung detects strike within 15 miles
-- Lightning All Clear -- Gotify after 30 min no strikes
-- NWS Severe Weather Alert -- Gotify on any NWS alert
+- Coffee Morning Lights — Nespresso >10W triggers kitchen/dining/office lights + office fan
+- Daily Watchman Report — 5am, reports missing entity count via Gotify
+- Reboot Apple TV — auto-reload config when master bedroom ATV goes unavailable
+- Lightning Alert — Gotify push when Blitzortung detects strike within 15 miles
+- Lightning All Clear — Gotify after 30 min no strikes
+- NWS Severe Weather Alert — Gotify on any NWS alert
 
 ## Weather Integrations
 
-- **NWS** (weather.klex) -- forecasts + severe alerts
-- **OpenWeatherMap v3.0** (weather.openweathermap) -- minute-by-minute rain, UV, wind
-- **Blitzortung** (sensor.home_lightning_distance) -- real-time lightning detection
+- **NWS** (weather.klex) — forecasts + severe alerts
+- **OpenWeatherMap v3.0** (weather.openweathermap) — minute-by-minute rain, UV, wind
+- **Blitzortung** (sensor.home_lightning_distance) — real-time lightning detection
 
 ## Presence Tracking
 
-- **OwnTracks** (Chris) -- HTTP via Nabu Casa webhook
+- **OwnTracks** (Chris) — HTTP via Nabu Casa webhook
 - **HA Companion App** (iPhone 17 Pro Max)
-- **Vicky** -- pending OwnTracks setup
+- **Vicky** — pending OwnTracks setup
 - person.chris_conner uses both trackers
 
 ## Watchman Status
 
-22 missing entities remaining -- 18 pool (seasonal, back in spring), 2 Vicky/wife ETA (pending), 2 weather in pool view. Daily report at 5am via Gotify.
+22 missing entities remaining — 18 pool (seasonal, back in spring), 2 Vicky/wife ETA (pending), 2 weather in pool view. Daily report at 5am via Gotify.
 
-## Safety -- CRITICAL
+## Safety — CRITICAL
 
 Alexander (5yo) and Dexter (dog) are both elopers. Any automation involving doors, gates, or locks must:
 - Default to locked/closed
@@ -99,12 +105,12 @@ Alexander (5yo) and Dexter (dog) are both elopers. Any automation involving door
 - Never auto-unlock exterior doors/gates
 - Verify gate locked after service visits (Mondays poop crew, biweekly lawn)
 
-Alexander's disability is PRIVATE -- never in public-facing content.
+Alexander's disability is PRIVATE — never in public-facing content.
 
 ## Household Schedule (for automation context)
 
 - Morning: Nespresso triggers lights
-- 10:30am Tues: Alexander -> Easterseals therapy
+- 10:30am Tues: Alexander → Easterseals therapy
 - 11:45am-1:25pm Mon-Fri: Alexander at preschool
 - 2:15pm-5:15pm Mon-Fri: ABA therapy in-home (house should be calm)
 - Bedtime: Hatch sound machine, scene.sleep
