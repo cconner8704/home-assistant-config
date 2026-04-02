@@ -1,3 +1,5 @@
+# Plex claim monitoring handled by Uptime Kuma (not HA)
+
 # COMMENTED OUT - Life360 removed, broken until Vicky is on OwnTracks
 # TODO: Replace device_tracker.life360_vicky_conner with Vicky's OwnTracks entity
 # TODO: Move API key reference to use !secret google_maps_api_key

@@ -30,10 +30,16 @@ frontend:
   extra_module_url:
     - /local/community/custom-brand-icons/custom-brand-icons.js
 
-# REST commands — iMessage via BlueBubbles
+# REST commands — notifications
 rest_command:
   imessage:
     url: !secret bluebubbles_url
     method: POST
     content_type: "application/json"
     payload: '{"chatGuid": "any;-;+18594756907", "message": "{{ message }}", "tempGuid": "ha-{{ now().timestamp() | int }}", "method": "apple-script"}'
+  pushover:
+    url: !secret pushover_url
+    method: POST
+    content_type: "application/x-www-form-urlencoded"
+    payload: "message={{ message }}"
+    timeout: 20

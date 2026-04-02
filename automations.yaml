@@ -14,8 +14,8 @@
   mode: single
 
 - alias: Daily Watchman Report
-  id: daily_watchman_imessage
-  description: Runs Watchman report at 5am and sends missing entity count via iMessage
+  id: daily_watchman_pushover
+  description: Runs Watchman report at 5am and sends missing entity count via Pushover
   trigger:
   - platform: time
     at: "05:00:00"
@@ -23,9 +23,9 @@
   - action: watchman.report
   - delay:
       seconds: 10
-  - action: rest_command.imessage
+  - action: rest_command.pushover
     data:
-      message: "[Watchman] Missing entities: {{ states('sensor.watchman_missing_entities') }}"
+      message: "Missing entities: {{ states('sensor.watchman_missing_entities') }}&title=Watchman Report&priority=-1"
   mode: single
 
 - alias: Coffee Morning Lights
@@ -73,9 +73,9 @@
     entity_id: sensor.home_lightning_counter
     above: 0
   action:
-  - action: rest_command.imessage
+  - action: rest_command.pushover
     data:
-      message: "[Lightning] ⚡ {{ states('sensor.home_lightning_distance') }} miles away ({{ states('sensor.home_lightning_azimuth') }}°). GET OUT OF THE POOL!"
+      message: "Lightning {{ states('sensor.home_lightning_distance') }} miles away. GET OUT OF THE POOL!&title=⚡ LIGHTNING ALERT&priority=1"
   mode: single
 
 - alias: Lightning All Clear
@@ -89,9 +89,9 @@
       minutes: 30
   condition: []
   action:
-  - action: rest_command.imessage
+  - action: rest_command.pushover
     data:
-      message: "[Lightning] All clear — no strikes for 30 minutes. Pool is safe."
+      message: "No strikes for 30 minutes. Pool is safe.&title=Lightning All Clear&priority=-1"
   mode: single
 
 - alias: NWS Severe Weather Alert
@@ -105,7 +105,7 @@
   - condition: template
     value_template: "{{ state_attr('weather.klex', 'alerts') | length > 0 }}"
   action:
-  - action: rest_command.imessage
+  - action: rest_command.pushover
     data:
-      message: "[Weather] ⚠️ NWS severe weather alert for your area. Check HA for details."
+      message: "NWS severe weather alert for your area. Check HA for details.&title=⚠️ SEVERE WEATHER&priority=1"
   mode: single
