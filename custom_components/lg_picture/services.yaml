@@ -1,0 +1,53 @@
+set_settings:
+  name: Set Picture Settings
+  description: Set picture settings (backlight, brightness, contrast, color) on a paired LG webOS TV.
+  fields:
+    host:
+      name: Host
+      description: TV IP address or hostname
+      required: true
+      example: 192.168.21.215
+      selector:
+        text:
+    client_key:
+      name: Client Key
+      description: aiopylgtv client key for the TV
+      required: true
+      selector:
+        text:
+    backlight:
+      name: Backlight
+      description: Backlight level (0-100)
+      example: "20"
+      selector:
+        number:
+          min: 0
+          max: 100
+          mode: slider
+    brightness:
+      name: Brightness
+      description: Brightness level (0-100)
+      example: "13"
+      selector:
+        number:
+          min: 0
+          max: 100
+          mode: slider
+    contrast:
+      name: Contrast
+      description: Contrast level (0-100)
+      example: "13"
+      selector:
+        number:
+          min: 0
+          max: 100
+          mode: slider
+    color:
+      name: Color
+      description: Color saturation (0-100)
+      example: "70"
+      selector:
+        number:
+          min: 0
+          max: 100
+          mode: slider

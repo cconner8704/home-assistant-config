@@ -109,3 +109,69 @@
     data:
       message: "NWS severe weather alert for your area. Check HA for details.&title=⚠️ SEVERE WEATHER&priority=1"
   mode: single
+
+- alias: Master Bedroom TV - Vivid
+  id: tv_picture_vivid
+  description: Daytime preset - full brightness, contrast, backlight
+  trigger:
+  - platform: state
+    entity_id: input_boolean.tv_vivid
+    to: "on"
+  action:
+  - action: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.tv_dim
+      - input_boolean.tv_sleep
+  - action: lg_picture.set_settings
+    data:
+      host: !secret lg_master_bedroom_host
+      client_key: !secret lg_master_bedroom_key
+      backlight: "100"
+      brightness: "50"
+      contrast: "100"
+  mode: single
+
+- alias: Master Bedroom TV - Dim
+  id: tv_picture_dim
+  description: Pre-sleep preset (backlight 20, brightness/contrast 35)
+  trigger:
+  - platform: state
+    entity_id: input_boolean.tv_dim
+    to: "on"
+  action:
+  - action: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.tv_vivid
+      - input_boolean.tv_sleep
+  - action: lg_picture.set_settings
+    data:
+      host: !secret lg_master_bedroom_host
+      client_key: !secret lg_master_bedroom_key
+      backlight: "20"
+      brightness: "35"
+      contrast: "35"
+  mode: single
+
+- alias: Master Bedroom TV - Sleep
+  id: tv_picture_sleep
+  description: Bedtime preset (backlight 20, brightness/contrast 13)
+  trigger:
+  - platform: state
+    entity_id: input_boolean.tv_sleep
+    to: "on"
+  action:
+  - action: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.tv_vivid
+      - input_boolean.tv_dim
+  - action: lg_picture.set_settings
+    data:
+      host: !secret lg_master_bedroom_host
+      client_key: !secret lg_master_bedroom_key
+      backlight: "20"
+      brightness: "13"
+      contrast: "13"
+  mode: single

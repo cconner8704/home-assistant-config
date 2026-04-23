@@ -20,6 +20,21 @@ sensor: !include sensors.yaml
 group: !include groups.yaml
 template: !include templates.yaml
 
+# Input booleans -- radio-button switches for Master Bedroom TV picture mode
+input_boolean:
+  tv_vivid:
+    name: TV Vivid
+    icon: mdi:television
+  tv_dim:
+    name: TV Dim
+    icon: mdi:brightness-4
+  tv_sleep:
+    name: TV Sleep
+    icon: mdi:brightness-2
+
+# Custom integration: LG webOS picture settings service
+lg_picture:
+
 # Entity customization
 homeassistant:
   internal_url: "http://homeassistant.local:8123"

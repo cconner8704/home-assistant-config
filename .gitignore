@@ -51,8 +51,9 @@ watchman_report.txt
 tts/
 *.pid
 
-# Custom components managed by HACS
-custom_components/
+# Custom components managed by HACS (hand-written ones explicitly exempted below)
+custom_components/*
+!custom_components/lg_picture/
 
 # AI memory (may contain sensitive context)
 ai_memory/
