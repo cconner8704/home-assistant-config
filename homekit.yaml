@@ -10,6 +10,7 @@ filter:
 
   include_entity_globs:
     - cover.*
+    - input_boolean.tv_*
     - binary_sensor.backyard_gate_sensor_window_door_is_closed
     - binary_sensor.front_door
     - binary_sensor.ft991119g_laundry_door
