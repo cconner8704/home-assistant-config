@@ -19,6 +19,7 @@ scene: !include scenes.yaml
 sensor: !include sensors.yaml
 group: !include groups.yaml
 template: !include templates.yaml
+rest: !include rest.yaml
 
 # Input booleans -- radio-button switches for Master Bedroom TV picture mode
 input_boolean:

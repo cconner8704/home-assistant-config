@@ -1,0 +1,61 @@
+- resource: "http://api.openweathermap.org/data/2.5/air_pollution"
+  params:
+    lat: "37.98823580091178"
+    lon: "-84.44583714008333"
+    appid: !secret openweathermap_api_key
+  scan_interval: 900  # OWM Air Pollution updates hourly; 15min keeps it fresh without burning calls
+  sensor:
+    - name: "Outdoor AQI"
+      unique_id: outdoor_aqi
+      value_template: "{{ value_json.list[0].main.aqi }}"
+      icon: mdi:air-filter
+      # OWM AQI scale: 1=Good, 2=Fair, 3=Moderate, 4=Poor, 5=Very Poor
+
+    - name: "Outdoor PM2.5"
+      unique_id: outdoor_pm25
+      value_template: "{{ value_json.list[0].components['pm2_5'] | round(1) }}"
+      unit_of_measurement: "µg/m³"
+      device_class: pm25
+      state_class: measurement
+
+    - name: "Outdoor PM10"
+      unique_id: outdoor_pm10
+      value_template: "{{ value_json.list[0].components.pm10 | round(1) }}"
+      unit_of_measurement: "µg/m³"
+      device_class: pm10
+      state_class: measurement
+
+    - name: "Outdoor CO"
+      unique_id: outdoor_co
+      value_template: "{{ value_json.list[0].components.co | round(1) }}"
+      unit_of_measurement: "µg/m³"
+      device_class: carbon_monoxide
+      state_class: measurement
+
+    - name: "Outdoor NO2"
+      unique_id: outdoor_no2
+      value_template: "{{ value_json.list[0].components.no2 | round(2) }}"
+      unit_of_measurement: "µg/m³"
+      device_class: nitrogen_dioxide
+      state_class: measurement
+
+    - name: "Outdoor O3"
+      unique_id: outdoor_o3
+      value_template: "{{ value_json.list[0].components.o3 | round(2) }}"
+      unit_of_measurement: "µg/m³"
+      device_class: ozone
+      state_class: measurement
+
+    - name: "Outdoor SO2"
+      unique_id: outdoor_so2
+      value_template: "{{ value_json.list[0].components.so2 | round(2) }}"
+      unit_of_measurement: "µg/m³"
+      device_class: sulphur_dioxide
+      state_class: measurement
+
+    - name: "Outdoor NH3"
+      unique_id: outdoor_nh3
+      value_template: "{{ value_json.list[0].components.nh3 | round(2) }}"
+      unit_of_measurement: "µg/m³"
+      state_class: measurement
+      icon: mdi:molecule

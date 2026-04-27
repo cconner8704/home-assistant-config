@@ -4,6 +4,7 @@ secrets.yaml
 .storage/
 .envrc
 .mcp.json
+.mcp.json.*
 
 # Database
 *.db
@@ -63,3 +64,9 @@ Abode/
 
 # Zigbee
 zigbee.db*
+
+# Local-only reference notes (may contain secrets — Rook drops wiring guides here)
+docs/
+
+# Auto-generated daily reports (reproducible from sensors)
+data/
